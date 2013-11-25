@@ -1,9 +1,13 @@
 
 import temperature
+import time
 
-print(base_dir)
+t = temperature.TempReader(True)
 
 while True:
-	print(read_temp())	
+	c = t.thermometers[0].read_temp()
+	print("Thermometer 0 " + str(c) )
+	c1 = t.thermometers[1].read_temp()
+	print("Thermometer 1 " + str(c1) )
 	
 	time.sleep(1)
