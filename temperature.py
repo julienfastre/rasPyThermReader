@@ -26,15 +26,31 @@ class TempReader:
 
 		if (self._debug):
 			print("there are " + str(len(self.thermometers)) + " theremometers connected")
+			for therm in self.thermometers:
+				print(therm.getDeviceId())
+
+
+	def getThermometer(self, deviceId):
+		for t in self.thermometers:
+			if t.getDeviceId() == deviceId:
+				return t
+
+		raise ThermometerException(deviceId)
+		
 
 
 
 class Thermometer:
 
 	_device_file = ''
+	_id = ''
 
 	def __init__(self, folder, base):
 		self._device_file = folder + base
+		self._id = os.path.split(folder)[1]
+
+	def getDeviceId(self):
+		return self._id
 
 	def read_temp_raw(self):
 		f = open(self._device_file, 'r')
@@ -55,6 +71,11 @@ class Thermometer:
 
 
 
+class ThermometerException(Exception):
+	def __init__(self, deviceId):
+		self.deviceId = deviceId
 
+	def __str__(self):
+		return "The thermometer with id '" + str(self.deviceId) + "' is not found."
 
 
