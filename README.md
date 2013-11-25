@@ -29,3 +29,4 @@ except temperature.ThermometerException as e:
 	print(e) #this will print "The thermometer with id '28-0000046190ed' is not found." if this happen.
 
 #temperatures are in ° Celsius
+```
